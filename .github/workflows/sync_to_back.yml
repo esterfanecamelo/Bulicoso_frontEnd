@@ -1,0 +1,57 @@
+name: Sync Frontend to Backend Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checkout do FRONTEND (repo atual)
+      - name: Checkout Frontend Code
+        uses: actions/checkout@v4
+        with:
+          path: 'source-repo'
+
+      # Passo 2: Checkout do BACKEND (repo destino)
+      - name: Checkout Backend Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'SilvioGoncalvesXJr/Bulicoso'
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          path: 'backend-repo'
+
+      # Passo 3: Sincroniza arquivos do frontend para o backend
+      - name: Sync Frontend Files
+        run: |
+          rsync -av --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            --exclude='dist/' \
+            --exclude='build/' \
+            --exclude='.next/' \
+            --exclude='.cache/' \
+            --exclude='coverage/' \
+            --exclude='.env' \
+            --exclude='.env.local' \
+            --exclude='*.log' \
+            --exclude='docs/' \
+            ./source-repo/ ./backend-repo/frontend/
+
+      # Passo 4: Commit e Push
+      - name: Commit and Push Changes
+        run: |
+          cd backend-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(sync): Atualiza código do frontend automaticamente"
+            git push
+          else
+            echo "Nenhuma alteração para sincronizar."
+          fi
