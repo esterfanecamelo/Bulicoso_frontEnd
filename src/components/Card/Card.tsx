@@ -1,6 +1,10 @@
 import React from "react";
 
-function Card({ likes }) {
+type CardProps = {
+  likes: string | number;
+};
+
+function Card({ likes }: CardProps) {
   return (
     <div className="card">
       <h3>
