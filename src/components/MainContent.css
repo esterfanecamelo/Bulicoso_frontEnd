@@ -1,88 +1,111 @@
+/* =========================================
+   ESTRUTURA PRINCIPAL
+   ========================================= */
 .main-container {
-  flex: 1;
-  padding: 30px;
+  /* Transforma o container em uma coluna flexível */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Empurra o rodapé para baixo */
+
   background: linear-gradient(to bottom right, #f6fff9, #ffffff);
-  min-height: 100vh;
+  height: 100vh; /* Altura total da tela */
+  width: 1245px; /* Sua largura fixa */
+  margin: 0 auto; /* Centraliza o container na tela */
   box-sizing: border-box;
-  width: 1245px;
+  overflow: hidden; /* Evita barra de rolagem dupla */
 }
 
-/* Centralizar apenas o cabeçalho */
+/* =========================================
+   BARRA SUPERIOR (Initial Search)
+   ========================================= */
+.initial-search {
+  /* Mantendo seu estilo original */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  width: 100%; /* Ajustado para caber no container */
+  height: 50px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  background-color: transparent; /* Ou white, dependendo do design */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.initial-input-search {
+  color: black;
+  background-color: white;
+  width: 200px;
+  margin-left: 50px; /* Ajustado levemente */
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 30px;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+.initial-button-search {
+  /* Ajustei para flexbox para não quebrar layout */
+  margin-left: auto;
+  background: none;
+  border: 1px solid #10b981;
+  border-radius: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+  color: #10b981;
+}
+
+/* =========================================
+   ÁREA DE CONTEÚDO (Onde fica o Chat ou os Cards)
+   ========================================= */
+.content-area {
+  flex: 1; /* Ocupa todo o espaço disponível no meio */
+  overflow-y: auto; /* Permite rolagem apenas aqui */
+  padding: 20px 50px; /* Espaçamento interno */
+  display: flex;
+  flex-direction: column;
+  /* Personalização da barra de rolagem */
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 #f0f0f0;
+}
+
+/* Cabeçalho Interno (Bem vindo...) */
 .main-header {
   background: white;
-  padding: 40px 30px;
+  padding: 30px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 0 auto 50px auto; /* <-- centraliza horizontalmente */
-  width: 50%;
+  width: 60%;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centraliza conteúdo vertical dentro do bloco */
+  justify-content: center;
   align-items: center;
-  margin-top: 50px;
 }
 
-/* Título */
 .welcome {
   font-size: 22px;
   margin-bottom: 4px;
   color: #1f2937;
 }
 
-/* Subtítulo */
 .subtitle {
   font-size: 14px;
   color: #6b7280;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-/* Campo de busca */
-.input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-
-.input-field {
-  width: 300px;
-  padding: 10px 14px;
-  border-radius: 20px;
-  border: 1px solid #d1d5db;
-  outline: none;
-  font-size: 14px;
-  color: #333;
-  transition: all 0.2s ease;
-}
-
-.input-field:focus {
-  border-color: #10b981;
-}
-
-.send-btn {
-  border: none;
-  background: #10b981;
-  color: white;
-  border-radius: 50%;
-  padding: 8px 10px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.send-btn:hover {
-  background: #059669;
-}
-
-/* Cartões */
+/* =========================================
+   ESTILOS DOS CARDS (Estado Inicial)
+   ========================================= */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  justify-items: center; /* Centraliza horizontalmente cada card */
-  padding: 20px;
+  justify-items: center;
   width: 100%;
-  box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .card {
@@ -91,71 +114,135 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   width: 100%;
-  max-width: 300px; /* mantém tamanhos proporcionais */
+  max-width: 300px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border: 1px solid #10b981;
 }
 
 .card-text {
-  display: block; /* força o texto a quebrar linha */
   font-size: 14px;
   color: #4b5563;
-  margin-bottom: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal; /* permite quebra de linha */
-  word-wrap: break-word; /* garante quebra em palavras longas */
-}
-.close-btn {
-  cursor: pointer;
-  color: #6b7280;
-  font-size: 18px;
+  word-wrap: break-word;
 }
 
-.card-text {
-  font-size: 13px;
-  color: #4b5563;
-  margin-bottom: 16px;
-  height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-footer {
+/* =========================================
+   ESTILOS DO CHAT (Novos)
+   ========================================= */
+.chat-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  color: #6b7280;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 20px;
 }
 
-.heart {
-  color: #e11d48;
-  cursor: default;
+.chat-message {
+  display: flex;
+  width: 100%;
 }
 
-.share {
-  cursor: pointer;
+.chat-message.user {
+  justify-content: flex-end; /* Usuário na direita */
 }
 
-.initial-search{
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  width: 1215px;
-  height: 50px;
+.chat-message.bot {
+  justify-content: flex-start; /* Bot na esquerda */
 }
 
-.initial-input-search{
-  color: black;
+.message-bubble {
+  max-width: 70%;
+  padding: 12px 20px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  white-space: pre-wrap; /* Mantém quebras de linha */
+}
+
+/* Cores do Balão */
+.chat-message.user .message-bubble {
+  background-color: #10b981; /* Verde do seu tema */
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message.bot .message-bubble {
   background-color: white;
-  width: 200px;
-  margin-left: 100px;
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  height: 30px;
-  margin-top: 0;
-  border-radius: 10px;
+  color: #333;
+  border: 1px solid #e5e7eb;
+  border-bottom-left-radius: 4px;
 }
 
-.initial-button-search{
-  margin-left: 950px;
-  margin-top: 0px;
+/* =========================================
+   ÁREA DE INPUT (Rodapé Fixo)
+   ========================================= */
+.footer-input-container {
+  background: white;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 20px; /* Opcional, para combinar com bordas */
+  border-bottom-right-radius: 20px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+}
+
+/* Reutilizando seus estilos de input, mas ajustando largura */
+.input-field {
+  width: 100%; /* Ocupa todo espaço disponível no wrapper */
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 15px;
+  color: #333;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+.input-field:focus {
+  border-color: #10b981;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.send-btn {
+  border: none;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex-shrink: 0; /* Impede o botão de amassar */
+}
+
+.send-btn:hover {
+  background: #059669;
+}
+
+.send-btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
 }
