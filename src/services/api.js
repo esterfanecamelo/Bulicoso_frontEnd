@@ -87,5 +87,25 @@ export const api = {
       console.error("Erro ao deletar:", error);
       return { message: "Erro ao deletar." };
     }
+  },
+
+  // 6. [NOVO] CALENDAR: Editar um evento
+  editEvent: async (eventId, newStartTime) => {
+    try {
+      const response = await fetch(`${API_URL}/calendar/edit/${eventId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ new_start_time_str: newStartTime }),
+      });
+
+      if (!response.ok) {
+         const err = await response.json();
+         throw new Error(err.detail || "Erro ao editar");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Erro ao editar:", error);
+      throw error;
+    }
   }
 };
