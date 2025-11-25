@@ -46,6 +46,8 @@ jobs:
 
       # Passo 4: Commit e Push com PAT explícito
       - name: Commit and Push Changes
+        env:
+          PAT: ${{ secrets.BULICOSO_PAT }}
         run: |
           cd backend-repo
           git config user.name "GitHub Actions"
@@ -53,7 +55,8 @@ jobs:
           git add .
           if ! git diff --staged --quiet; then
             git commit -m "chore(sync): Atualiza código do frontend automaticamente"
-            git push https://x-access-token:${{ secrets.BULICOSO_PAT }}@github.com/SilvioGoncalvesXJr/Bulicoso.git
+            git remote set-url origin https://x-access-token:${PAT}@github.com/SilvioGoncalvesXJr/Bulicoso.git
+            git push origin main
           else
             echo "Nenhuma alteração para sincronizar."
           fi
