@@ -55,4 +55,3 @@ jobs:
           else
             echo "Nenhuma alteração para sincronizar."
           fi
-#teste
