@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'SilvioGoncalvesXJr/Bulicoso'
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.BULICOSO_PAT }}
           path: 'backend-repo'
 
       # Passo 3: Sincroniza arquivos do frontend para o backend
