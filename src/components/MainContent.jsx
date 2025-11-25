@@ -213,7 +213,7 @@ export default function MainContent() {
           <div className="modal-overlay">
               <div className="modal-content">
                   <h3>Agendar</h3>
-                  <input className="modal-input" placeholder="Instrução (Ex: Dipirona 8/8h)" value={scheduleData.instrucao} onChange={(e) => setScheduleData({...scheduleData, instrucao: e.target.value})} />
+                  <input className="modal-input" placeholder="Instrução (Ex: Dipirona 8/8h por 5 dias)" value={scheduleData.instrucao} onChange={(e) => setScheduleData({...scheduleData, instrucao: e.target.value})} />
                   <input className="modal-input" style={{marginTop: 10}} placeholder="Início (agora)" value={scheduleData.inicio} onChange={(e) => setScheduleData({...scheduleData, inicio: e.target.value})} />
                   <div className="modal-actions">
                       <button className="cancel-btn" onClick={() => setShowScheduleForm(false)}>Voltar</button>

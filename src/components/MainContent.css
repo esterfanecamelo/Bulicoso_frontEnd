@@ -1,248 +1,330 @@
 /* =========================================
-   ESTRUTURA PRINCIPAL
+   RESET GLOBAL OBRIGATÓRIO
+   ========================================= */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Impede scroll na página inteira, só queremos no chat */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   CONTAINER PRINCIPAL (TELA CHEIA)
    ========================================= */
 .main-container {
-  /* Transforma o container em uma coluna flexível */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Empurra o rodapé para baixo */
-
-  background: linear-gradient(to bottom right, #f6fff9, #ffffff);
-  height: 100vh; /* Altura total da tela */
-  width: 1245px; /* Sua largura fixa */
-  margin: 0 auto; /* Centraliza o container na tela */
-  box-sizing: border-box;
-  overflow: hidden; /* Evita barra de rolagem dupla */
+  height: 100vh; /* Força 100% da altura da visão */
+  width: 100vw;  /* Força 100% da largura da visão */
+  background: linear-gradient(to bottom right, #f0fdf4, #ffffff);
+  font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+  position: relative;
+  /* Removemos max-width e margin auto para pegar a tela toda */
 }
 
 /* =========================================
-   BARRA SUPERIOR (Initial Search)
+   HEADER (CABEÇALHO)
    ========================================= */
-.initial-search {
-  /* Mantendo seu estilo original */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  width: 100%; /* Ajustado para caber no container */
-  height: 50px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  background-color: transparent; /* Ou white, dependendo do design */
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.initial-input-search {
-  color: black;
-  background-color: white;
-  width: 200px;
-  margin-left: 50px; /* Ajustado levemente */
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  height: 30px;
-  border-radius: 10px;
-  padding-left: 10px;
-}
-
-.initial-button-search {
-  /* Ajustei para flexbox para não quebrar layout */
-  margin-left: auto;
-  background: none;
-  border: 1px solid #10b981;
-  border-radius: 20px;
-  padding: 5px 15px;
-  cursor: pointer;
-  color: #10b981;
-}
-
-/* =========================================
-   ÁREA DE CONTEÚDO (Onde fica o Chat ou os Cards)
-   ========================================= */
-.content-area {
-  flex: 1; /* Ocupa todo o espaço disponível no meio */
-  overflow-y: auto; /* Permite rolagem apenas aqui */
-  padding: 20px 50px; /* Espaçamento interno */
-  display: flex;
-  flex-direction: column;
-  /* Personalização da barra de rolagem */
-  scrollbar-width: thin;
-  scrollbar-color: #10b981 #f0f0f0;
-}
-
-/* Cabeçalho Interno (Bem vindo...) */
 .main-header {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 60%;
-  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px); /* Efeito de vidro */
+  padding: 15px 20px;
+  border-bottom: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  z-index: 10;
+  width: 100%;
+  flex-shrink: 0; /* Garante que o header não encolha */
 }
 
 .welcome {
-  font-size: 22px;
-  margin-bottom: 4px;
-  color: #1f2937;
+  font-size: 18px;
+  color: #111827;
+  margin: 0;
+  font-weight: 700;
 }
 
 .subtitle {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 10px;
+  font-size: 13px;
+  color: #10b981;
+  margin: 4px 0 0 0;
+  font-weight: 500;
 }
 
 /* =========================================
-   ESTILOS DOS CARDS (Estado Inicial)
+   ÁREA DE CONTEÚDO (ONDE O CHAT ROLA)
    ========================================= */
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  justify-items: center;
+.content-area {
+  flex: 1; /* Ocupa todo o espaço vertical disponível */
   width: 100%;
-  margin-top: 20px;
+  overflow-y: auto; /* Scroll apenas aqui */
+  padding: 0 20px; /* Espaço nas laterais */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o container do chat */
+  scroll-behavior: smooth;
 }
 
-.card {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  width: 100%;
-  max-width: 300px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+/* Custom Scrollbar */
+.content-area::-webkit-scrollbar { width: 6px; }
+.content-area::-webkit-scrollbar-track { background: transparent; }
+.content-area::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
 
-.card:hover {
-  transform: translateY(-5px);
-  border: 1px solid #10b981;
-}
-
-.card-text {
-  font-size: 14px;
-  color: #4b5563;
-  word-wrap: break-word;
-}
-
-/* =========================================
-   ESTILOS DO CHAT (Novos)
-   ========================================= */
+/* Container Interno do Chat (Para não ficar muito largo em telas grandes) */
 .chat-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding-bottom: 20px;
+  max-width: 1000px; /* Limite de largura para leitura confortável */
+  padding: 20px 0;   /* Espaço vertical interno */
 }
 
+/* =========================================
+   MENSAGENS (BALÕES)
+   ========================================= */
 .chat-message {
   display: flex;
   width: 100%;
+  animation: messageSlideIn 0.3s ease-out;
 }
 
-.chat-message.user {
-  justify-content: flex-end; /* Usuário na direita */
+@keyframes messageSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.chat-message.bot {
-  justify-content: flex-start; /* Bot na esquerda */
-}
+.chat-message.user { justify-content: flex-end; }
+.chat-message.bot { justify-content: flex-start; }
 
 .message-bubble {
-  max-width: 70%;
+  max-width: 85%;
   padding: 12px 20px;
   border-radius: 18px;
   font-size: 15px;
   line-height: 1.5;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  white-space: pre-wrap; /* Mantém quebras de linha */
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  white-space: pre-wrap;
+  word-break: break-word; /* Evita que palavras longas cortem o layout */
 }
 
-/* Cores do Balão */
 .chat-message.user .message-bubble {
-  background-color: #10b981; /* Verde do seu tema */
+  background-color: #10b981;
   color: white;
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 2px;
 }
 
 .chat-message.bot .message-bubble {
   background-color: white;
-  color: #333;
+  color: #374151;
   border: 1px solid #e5e7eb;
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 2px;
 }
 
 /* =========================================
-   ÁREA DE INPUT (Rodapé Fixo)
+   CARDS / CHIPS (Barra de Sugestões)
+   ========================================= */
+.cards-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 5px 5px 15px 5px;
+  width: 100%;
+  flex-shrink: 0;
+  /* Em telas grandes, centraliza os cards */
+  justify-content: flex-start;
+}
+
+@media (min-width: 1000px) {
+  .cards-container { justify-content: center; }
+}
+
+/* Custom Scrollbar Horizontal */
+.cards-container::-webkit-scrollbar { height: 4px; }
+.cards-container::-webkit-scrollbar-track { background: transparent; }
+.cards-container::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 10px 24px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  flex-shrink: 0; /* Impede que os cards encolham */
+}
+
+.card:hover {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.card-text { margin: 0; pointer-events: none; }
+
+/* =========================================
+   INPUT (RODAPÉ FIXO)
    ========================================= */
 .footer-input-container {
   background: white;
   padding: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #e5e7eb;
+  width: 100%;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom-left-radius: 20px; /* Opcional, para combinar com bordas */
-  border-bottom-right-radius: 20px;
 }
 
 .input-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   width: 100%;
-  max-width: 800px;
-  position: relative;
-}
-
-/* Reutilizando seus estilos de input, mas ajustando largura */
-.input-field {
-  width: 100%; /* Ocupa todo espaço disponível no wrapper */
-  padding: 12px 20px;
-  border-radius: 30px;
-  border: 1px solid #d1d5db;
-  outline: none;
-  font-size: 15px;
-  color: #333;
-  transition: all 0.2s ease;
+  max-width: 1000px; /* Mesma largura máxima do chat */
+  display: flex;
+  gap: 12px;
+  align-items: center;
   background-color: #f9fafb;
+  padding: 6px 10px 6px 24px;
+  border-radius: 50px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s;
 }
 
-.input-field:focus {
+.input-wrapper:focus-within {
   border-color: #10b981;
   background-color: white;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.input-field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  padding: 12px 0;
+  color: #1f2937;
+  min-width: 0; /* Evita overflow em flexbox */
 }
 
 .send-btn {
-  border: none;
   background: #10b981;
+  border: none;
   color: white;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
-  flex-shrink: 0; /* Impede o botão de amassar */
+  transition: transform 0.2s;
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
-.send-btn:hover {
-  background: #059669;
+.send-btn:hover { transform: scale(1.05); background: #059669; }
+.send-btn:disabled { background: #d1d5db; cursor: not-allowed; transform: none; }
+
+/* =========================================
+   MODAIS (Centralizados e Responsivos)
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
 }
 
-.send-btn:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: modalPopUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 90vh; /* Evita que o modal saia da tela na vertical */
+  overflow-y: auto; /* Scroll dentro do modal se necessário */
 }
+
+@keyframes modalPopUp {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-content h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Estilos internos dos modais (iguais ao anterior) */
+.modal-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  background-color: #f9fafb;
+}
+.modal-input:focus {
+  background-color: white;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.search-box { display: flex; gap: 10px; }
+.search-btn {
+  background: #f3f4f6; border: 1px solid #e5e7eb;
+  border-radius: 12px; padding: 0 20px; cursor: pointer;
+}
+
+.events-list {
+  border: 1px solid #e5e7eb; border-radius: 16px;
+  max-height: 250px; overflow-y: auto; background: #ffffff; padding: 5px;
+}
+
+.event-item { border-bottom: 1px solid #f3f4f6; }
+.event-item:last-child { border-bottom: none; }
+.event-item label {
+  display: flex; align-items: center; padding: 12px 15px;
+  cursor: pointer; gap: 12px; border-radius: 10px;
+}
+.event-item label:hover { background-color: #f0fdf4; }
+
+.event-date { font-weight: 600; color: #111827; font-size: 13px; background: #f3f4f6; padding: 4px 8px; border-radius: 6px; }
+.event-name { color: #4b5563; font-size: 14px; }
+
+.modal-actions { display: flex; gap: 15px; margin-top: 10px; }
+.cancel-btn, .confirm-btn {
+  flex: 1; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; text-align: center;
+}
+.cancel-btn { background: transparent; border: 1px solid #d1d5db; color: #6b7280; }
+.confirm-btn { background: #10b981; border: none; color: white; }
+.delete-action { background: #ef4444; }
