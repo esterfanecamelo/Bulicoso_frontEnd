@@ -10,21 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Passo 1: Checkout do FRONTEND (repo atual)
+      # Passo 1: Checkout do FRONTEND
       - name: Checkout Frontend Code
         uses: actions/checkout@v4
         with:
+          persist-credentials: false  # 🔥 IMPORTANTE
           path: 'source-repo'
 
-      # Passo 2: Checkout do BACKEND (repo destino)
+      # Passo 2: Checkout BACKEND usando o PAT
       - name: Checkout Backend Repository
         uses: actions/checkout@v4
         with:
           repository: 'SilvioGoncalvesXJr/Bulicoso'
           token: ${{ secrets.BULICOSO_PAT }}
+          persist-credentials: false   # 🔥 IMPORTANTE
           path: 'backend-repo'
 
-      # Passo 3: Sincroniza arquivos do frontend para o backend
+      # Passo 3: Sincronizar arquivos
       - name: Sync Frontend Files
         run: |
           rsync -av --delete \
@@ -42,7 +44,7 @@ jobs:
             --exclude='docs/' \
             ./source-repo/ ./backend-repo/frontend/
 
-      # Passo 4: Commit e Push
+      # Passo 4: Commit e Push com PAT explícito
       - name: Commit and Push Changes
         run: |
           cd backend-repo
@@ -51,7 +53,7 @@ jobs:
           git add .
           if ! git diff --staged --quiet; then
             git commit -m "chore(sync): Atualiza código do frontend automaticamente"
-            git push
+            git push https://x-access-token:${{ secrets.BULICOSO_PAT }}@github.com/SilvioGoncalvesXJr/Bulicoso.git
           else
             echo "Nenhuma alteração para sincronizar."
           fi
