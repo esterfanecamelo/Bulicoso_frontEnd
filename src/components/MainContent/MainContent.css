@@ -21,7 +21,7 @@ html, body, #root {
   flex-direction: column;
   height: 100vh; /* Força 100% da altura da visão */
   width: 100vw;  /* Força 100% da largura da visão */
-  background: linear-gradient(to bottom right, #f0fdf4, #ffffff);
+  background: linear-gradient(to bottom right, #d4f5de, #ffffff);
   font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   position: relative;
   /* Removemos max-width e margin auto para pegar a tela toda */
@@ -116,8 +116,8 @@ html, body, #root {
 }
 
 .chat-message.user .message-bubble {
-  background-color: #10b981;
-  color: white;
+  background-color: #108fb9 !important;
+  color: white !important;
   border-bottom-right-radius: 2px;
 }
 
@@ -328,3 +328,11 @@ html, body, #root {
 .cancel-btn { background: transparent; border: 1px solid #d1d5db; color: #6b7280; }
 .confirm-btn { background: #10b981; border: none; color: white; }
 .delete-action { background: #ef4444; }
+
+/* Imagem do Bulicoso */
+.bot-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}

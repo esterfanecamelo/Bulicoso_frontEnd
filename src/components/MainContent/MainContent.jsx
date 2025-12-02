@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./MainContent.css";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import Card from "../Card/Card";
+import Message from "../Message/Message";
+import BulicosoAvatar from "../../assets/bulicosoAvatar.png";
 
 export default function MainContent() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Estado inicial das mensagens
-  const [messages, setMessages] = useState([
-    { role: 'bot', text: 'Olá! Sou o Bulicoso. Posso te ajudar a agendar, editar, cancelar ou tirar dúvidas.' }
-  ]);
+  const [messages, setMessages] = useState([{}]);
 
   // --- ESTADOS DOS MODAIS ---
   const [showScheduleForm, setShowScheduleForm] = useState(false);
@@ -35,7 +36,7 @@ export default function MainContent() {
   // Cartões de Exemplo (Balões)
   const exemplos = [
     { id: 1, text: "Quais as reações da Dipirona?" },
-    { id: 2, text: "Quero agendar Losartana" },
+    { id: 2, text: "Quero agendar medicamento" },
     { id: 3, text: "Cancelar meu agendamento" },
     { id: 4, text: "Editar horário de remédio" },
   ];
@@ -174,24 +175,22 @@ export default function MainContent() {
         <div className="chat-container">
 
             {/* Renderiza a Saudação Inicial (index 0) */}
-            {messages.length > 0 && (
-                <div className="chat-message bot">
-                    <div className="message-bubble">{messages[0].text}</div>
-                </div>
-            )}
+            <Message
+                role="bot"
+                text="Olá! Sou o Buliçoso. Posso te ajudar a agendar, editar, cancelar ou tirar dúvidas sobre medicamentos."
+                avatar={BulicosoAvatar}
+            />
 
             {/* --- CARTÕES (BALÕES) SEMPRE VISÍVEIS AQUI --- */}
             {/* Eles ficam entre a saudação e o resto do chat, ou no topo se preferir */}
             <div className="cards-container">
-                {exemplos.map((ex) => (
-                <div
-                    key={ex.id}
-                    className="card"
-                    onClick={() => handleEnviar(ex.text)} // Clicar agora envia direto!
-                >
-                    <p className="card-text">{ex.text}</p>
-                </div>
-                ))}
+            {exemplos.map((exemplo) => (
+                <Card 
+                key={exemplo.id} 
+                text={exemplo.text} 
+                onClick={() => handleEnviar(exemplo.text)} 
+                />
+            ))}
             </div>
 
             {/* Renderiza o Resto das Mensagens (Histórico) */}
@@ -232,18 +231,40 @@ export default function MainContent() {
                       <input className="modal-input" placeholder="Nome..." value={medNameSearch} onChange={(e) => setMedNameSearch(e.target.value)} />
                       <button className="search-btn" onClick={() => fetchEvents(medNameSearch)}>{isSearchingEvents ? "..." : "🔍"}</button>
                   </div>
+
+                    {/* Checkbox Selecionar Todos */}
+                    {eventsFound.length > 0 && (
+                        <div style={{ marginBottom: 10 }}>
+                        <label>
+                            <input
+                            type="checkbox"
+                            checked={selectedEventIds.length === eventsFound.length}
+                            onChange={(e) => {
+                                if (e.target.checked) {
+                                setSelectedEventIds(eventsFound.map((ev) => ev.id)); // seleciona todos
+                                } else {
+                                setSelectedEventIds([]); // desmarca todos
+                                }
+                            }}
+                            />{" "}
+                            Selecionar Todos
+                        </label>
+                        </div>
+                    )}
+
                   <div className="events-list">
                       <ul>
-                          {eventsFound.map(ev => (
-                              <li key={ev.id} className="event-item">
-                                  <label>
-                                      <input type="checkbox" checked={selectedEventIds.includes(ev.id)} onChange={() => toggleSelect(ev.id)} />
-                                      <span className="event-date">{ev.start_time_formatted}</span> <span className="event-name">{ev.summary}</span>
-                                  </label>
-                              </li>
-                          ))}
+                        {eventsFound.map(ev => (
+                            <li key={ev.id} className="event-item">
+                                <label>
+                                    <input type="checkbox" checked={selectedEventIds.includes(ev.id)} onChange={() => toggleSelect(ev.id)} />
+                                    <span className="event-date">{ev.start_time_formatted}</span> <span className="event-name">{ev.summary}</span>
+                                </label>
+                            </li>
+                        ))}
                       </ul>
                   </div>
+
                   <div className="modal-actions">
                       <button className="cancel-btn" onClick={() => setShowCancelModal(false)}>Fechar</button>
                       <button className="confirm-btn delete-action" onClick={handleConfirmCancel} disabled={selectedEventIds.length === 0}>Cancelar Selecionados</button>
@@ -296,7 +317,7 @@ export default function MainContent() {
       <div className="footer-input-container">
         <div className="input-wrapper">
           <input className="input-field" placeholder="Digite aqui..." value={prompt} onChange={(e) => setPrompt(e.target.value)} onKeyDown={handleKeyDown} disabled={loading} />
-          <button className="send-btn" onClick={() => handleEnviar()} disabled={loading}>P</button>
+          <button className="send-btn" onClick={() => handleEnviar()} disabled={loading}>›</button>
         </div>
       </div>
     </div>
