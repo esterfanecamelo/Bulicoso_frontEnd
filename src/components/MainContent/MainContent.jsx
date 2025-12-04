@@ -42,9 +42,7 @@ export default function MainContent() {
   ];
 
   // --- FUNÇÃO PRINCIPAL DE ENVIO ---
-  // Agora aceita um argumento opcional 'textoManual' para quando clicar no card
   async function handleEnviar(textoManual = null) {
-    // Se textoManual existir (clique no card), usa ele. Se não, usa o estado 'prompt' (input).
     const textoUsuario = (typeof textoManual === "string" ? textoManual : prompt).trim();
 
     if (!textoUsuario) return;
@@ -103,6 +101,29 @@ export default function MainContent() {
   }
 
   // --- FUNÇÕES AUXILIARES ---
+
+  const handleLogout = async () => {
+    try {
+      // 1. Chama a função de logout do serviço (api.js)
+      await api.logout();
+
+      // 2. Limpa dados locais
+      sessionStorage.clear();
+      localStorage.clear();
+
+      alert("Sessão encerrada com sucesso.");
+
+      // 3. REDIRECIONA PARA A HOME PAGE
+      window.location.href = '/';
+
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+      alert("Erro ao tentar sair. O servidor pode estar indisponível.");
+
+      // Mesmo com erro, as vezes é seguro redirecionar ou limpar o storage
+      // window.location.href = '/';
+    }
+  };
 
   const fetchEvents = async (name) => {
       if(!name) return;
@@ -166,9 +187,44 @@ export default function MainContent() {
 
   return (
     <div className="main-container">
+      {/* Estilos específicos para o botão de logout (você pode mover para o CSS depois) */}
+      <style>{`
+        .main-header {
+          position: relative; /* Necessário para o botão absoluto funcionar */
+        }
+        .logout-btn {
+          position: absolute; /* Fixa o botão no canto do header */
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%); /* Centraliza verticalmente */
+          background-color: #e57373;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 14px;
+          transition: background-color 0.2s;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .logout-btn:hover {
+          background-color: #ef5350;
+        }
+      `}</style>
+
       <header className="main-header">
-        <h1 className="welcome">Bem vindo, Paulo</h1>
-        <p className="subtitle">Assistente Inteligente de Medicação</p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h1 className="welcome">Bem vindo, Paulo</h1>
+            <p className="subtitle">Assistente Inteligente de Medicação</p>
+        </div>
+
+        {/* Botão posicionado via CSS absoluto (definido no style acima) */}
+        <button className="logout-btn" onClick={handleLogout}>
+            Sair 🚪
+        </button>
       </header>
 
       <div className="content-area">
@@ -182,13 +238,12 @@ export default function MainContent() {
             />
 
             {/* --- CARTÕES (BALÕES) SEMPRE VISÍVEIS AQUI --- */}
-            {/* Eles ficam entre a saudação e o resto do chat, ou no topo se preferir */}
             <div className="cards-container">
             {exemplos.map((exemplo) => (
-                <Card 
-                key={exemplo.id} 
-                text={exemplo.text} 
-                onClick={() => handleEnviar(exemplo.text)} 
+                <Card
+                key={exemplo.id}
+                text={exemplo.text}
+                onClick={() => handleEnviar(exemplo.text)}
                 />
             ))}
             </div>

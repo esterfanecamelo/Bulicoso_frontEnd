@@ -17,6 +17,23 @@ export const api = {
     window.location.href = `${BASE_URL}/auth/login`;
   },
 
+  logout: async () => {
+    const response = await fetch(`${BASE_URL}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Adicione o token aqui se sua API exigir autenticação via Header
+        // 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro ao realizar logout: ${response.statusText}`);
+    }
+
+    return true; // Retorna true indicando que o back-end processou a saída
+  },
+
   // ============================================================
   // CHATBOT & INTENÇÃO
   // ============================================================
