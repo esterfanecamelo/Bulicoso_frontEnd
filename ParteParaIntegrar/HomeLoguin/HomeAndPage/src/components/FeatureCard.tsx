@@ -10,23 +10,23 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, description, index }: FeatureCardProps) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      whileHover={{ 
+      whileHover={{
         y: -10,
         transition: { duration: 0.3 }
       }}
-      className="place-self-stretch relative rounded-[14px] shrink-0" 
+      className="place-self-stretch relative rounded-[14px] shrink-0"
       data-name="Card"
     >
       <div className="size-full">
         <div className="box-border content-stretch flex flex-col gap-[17px] items-start pl-[32px] pr-0 py-[32px] relative size-full">
           <div className="basis-0 grow min-h-px min-w-px relative shrink-0 w-[304px]">
             <div className="bg-clip-padding border-0 border-[transparent] border-solid box-border content-stretch flex gap-[12px] h-[32px] items-center relative w-[304px]">
-              <motion.div 
+              <motion.div
                 initial={{ rotate: 0 }}
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}

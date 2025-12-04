@@ -12,24 +12,24 @@ function Container({ children, additionalClassNames = "" }: React.PropsWithChild
 export function ToolsList() {
   return (
     <div className="absolute content-stretch flex flex-col gap-[48px] h-[210px] items-start left-[384px] top-[1109px] w-[1161px]" data-name="Section" id="tools">
-      <motion.div 
+      <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="h-[24px] relative shrink-0 w-full" 
+        className="h-[24px] relative shrink-0 w-full"
         data-name="Heading 2"
       >
         <p className="absolute font-['Jost:Regular',sans-serif] font-normal leading-[24px] left-[576.88px] text-[#0f172b] text-[36px] text-center text-nowrap top-[-2px] translate-x-[-50%] whitespace-pre">Nossas Ferramentas</p>
       </motion.div>
       <div className="h-[116px] relative shrink-0 w-full" data-name="Container">
         {/* JavaScript */}
-        <motion.div 
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[306.8px] top-0 w-[80px]" 
+          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[306.8px] top-0 w-[80px]"
           data-name="Container"
         >
           <Container additionalClassNames="bg-[#fdc700]">
@@ -47,12 +47,12 @@ export function ToolsList() {
         </motion.div>
 
         {/* React */}
-        <motion.div 
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[418.8px] top-0 w-[80px]" 
+          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[418.8px] top-0 w-[80px]"
           data-name="Container"
         >
           <Container additionalClassNames="bg-[#00d3f3]">
@@ -72,12 +72,12 @@ export function ToolsList() {
         </motion.div>
 
         {/* Gemini */}
-        <motion.div 
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[530.8px] top-0 w-[80px]" 
+          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[530.8px] top-0 w-[80px]"
           data-name="Container"
         >
           <Container additionalClassNames="bg-[#1d293d]">
@@ -95,12 +95,12 @@ export function ToolsList() {
         </motion.div>
 
         {/* Calendar API */}
-        <motion.div 
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[642.8px] top-0 w-[90.391px]" 
+          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[642.8px] top-0 w-[90.391px]"
           data-name="Container"
         >
           <Container additionalClassNames="bg-[#2b7fff]">
@@ -123,12 +123,12 @@ export function ToolsList() {
         </motion.div>
 
         {/* Supabase */}
-        <motion.div 
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[765.19px] top-0 w-[80px]" 
+          className="absolute content-stretch flex flex-col gap-[12px] h-[116px] items-center left-[765.19px] top-0 w-[80px]"
           data-name="Container"
         >
           <Container additionalClassNames="bg-[#00bba7]">

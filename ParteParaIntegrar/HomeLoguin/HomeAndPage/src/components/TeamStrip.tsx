@@ -16,27 +16,27 @@ export function TeamStrip() {
 
   return (
     <div className="absolute bg-[#0f172b] h-[540px] left-0 top-[1401px] w-[1920px]" data-name="Section" id="team">
-      <motion.div 
+      <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="absolute h-[24px] left-[384.44px] top-[60px] w-[1152px]" 
+        className="absolute h-[24px] left-[384.44px] top-[60px] w-[1152px]"
         data-name="Heading 2"
       >
         <p className="absolute font-['Arimo:Regular',sans-serif] font-normal leading-[24px] left-[575.94px] text-[48px] text-center text-nowrap text-white top-[-2px] translate-x-[-50%] whitespace-pre">Mentes Criativas</p>
       </motion.div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute h-[104px] left-[380px] top-[81px] w-[768px]" 
+        className="absolute h-[104px] left-[380px] top-[81px] w-[768px]"
         data-name="Paragraph"
       >
         <p className="absolute font-['Arimo:Regular',sans-serif] font-normal leading-[26px] left-[580.5px] text-[16px] text-[rgba(255,255,255,0.8)] text-center top-[33px] translate-x-[-50%] w-[763px]">Nossa equipe une inovação e empatia para criar Bullçoso, a IA da classe. O projeto Bullçoso foi arquitetado para aprimorar e facilitar a interação digital através de IA, promovendo melhor atendimento e acessibilidade à informação de qualidade na área da saúde. Somos desenvolvedores e criativos que acreditam que tecnologia deve ser acessível a todos, especialmente à terceira idade.</p>
       </motion.div>
-      
+
       {teamMembers.map((member, index) => (
         <motion.div
           key={index}
@@ -44,81 +44,81 @@ export function TeamStrip() {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 * index }}
-          whileHover={{ 
-            y: -10, 
+          whileHover={{
+            y: -10,
             scale: 1.05,
             transition: { duration: 0.3 }
           }}
           className="absolute h-[193px] rounded-[30px] top-[252px] w-[173px]"
           style={{ left: member.left }}
         >
-          <img 
-            alt={member.name} 
-            className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[30px] size-full" 
-            src={member.img} 
+          <img
+            alt={member.name}
+            className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[30px] size-full"
+            src={member.img}
           />
         </motion.div>
       ))}
 
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.6 }}
         className="absolute font-['Arimo:Regular',sans-serif] font-normal leading-[24px] left-[554.94px] text-[16px] text-center text-nowrap text-white top-[460px] translate-x-[-50%] whitespace-pre"
       >{`Italo  Vicente`}</motion.p>
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.7 }}
         className="absolute font-['Arimo:Regular',sans-serif] font-normal leading-[24px] left-[757.44px] text-[16px] text-center text-nowrap text-white top-[460px] translate-x-[-50%] whitespace-pre"
       >{`Sílvio Gonçalves `}</motion.p>
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.8 }}
         className="absolute font-['Arimo:Regular',sans-serif] font-normal leading-[24px] left-[960.94px] text-[16px] text-center text-nowrap text-white top-[460px] translate-x-[-50%] whitespace-pre"
       >Esterfane Camelo</motion.p>
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.9 }}
         className="absolute font-['Arimo:Regular',sans-serif] font-normal h-[24px] leading-[24px] left-[1162.94px] text-[16px] text-center text-white top-[460px] translate-x-[-50%] w-[129px]"
       >Samuel Valente</motion.p>
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 1 }}
         className="absolute font-['Arimo:Regular',sans-serif] font-normal h-[24px] leading-[24px] left-[1365.94px] text-[16px] text-center text-white top-[460px] translate-x-[-50%] w-[129px]"
       >Pedro Henrique</motion.p>
-      
-      <motion.div 
+
+      <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[230px] size-[189.77px] top-[64px]" 
-        data-name="Container" 
+        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[230px] size-[189.77px] top-[64px]"
+        data-name="Container"
       />
-      <motion.div 
+      <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[1536px] size-[189.77px] top-[123px]" 
-        data-name="Container" 
+        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[1536px] size-[189.77px] top-[123px]"
+        data-name="Container"
       />
-      <motion.div 
+      <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[1660px] size-[189.77px] top-[235px]" 
-        data-name="Container" 
+        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[1660px] size-[189.77px] top-[235px]"
+        data-name="Container"
       />
-      <motion.div 
+      <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[1668px] size-[189.77px] top-[71px]" 
-        data-name="Container" 
+        className="absolute blur-[2px] border-2 border-[rgba(255,255,255,0.2)] border-solid filter left-[1668px] size-[189.77px] top-[71px]"
+        data-name="Container"
       />
     </div>
   );

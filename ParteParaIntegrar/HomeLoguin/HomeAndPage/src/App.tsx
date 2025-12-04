@@ -1,6 +1,8 @@
 import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+// Importamos o serviço de API que criamos
+import { api } from "./services/api";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'login'>('home');
@@ -10,9 +12,10 @@ export default function App() {
   };
 
   const handleGoogleLogin = () => {
-    // Simulate successful login - navigate back to home
-    alert('Login com Google simulado com sucesso!');
-    setCurrentPage('home');
+    // Chama a função do api.js que faz o redirecionamento.
+    // O navegador sairá desta página e irá para o Google.
+    // Não adianta colocar setCurrentPage('home') aqui, pois a página será recarregada.
+    api.loginGoogle();
   };
 
   return (

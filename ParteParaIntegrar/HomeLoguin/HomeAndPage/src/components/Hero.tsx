@@ -35,52 +35,52 @@ interface HeroProps {
 export function Hero({ onCTAClick }: HeroProps) {
   return (
     <div className="absolute h-[504px] left-[196px] overflow-clip top-[96px] w-[1528px]" data-name="Section" id="hero">
-      <motion.div 
+      <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute left-[531px] size-[465px] top-[-71px]" 
+        className="absolute left-[531px] size-[465px] top-[-71px]"
         data-name="Gemini_Generated_Image_qyyer0qyyer0qyye 2"
       >
-        <motion.img 
+        <motion.img
           whileHover={{ scale: 1.05, rotate: 2 }}
           transition={{ duration: 0.3 }}
-          alt="" 
-          className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full cursor-pointer" 
-          src={imgGeminiGeneratedImageQyyer0Qyyer0Qyye2} 
+          alt=""
+          className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full cursor-pointer"
+          src={imgGeminiGeneratedImageQyyer0Qyyer0Qyye2}
         />
       </motion.div>
       <div className="absolute h-[504px] left-0 top-0 w-[1528px]" data-name="Container">
-        <motion.div 
+        <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute border-2 border-slate-200 border-solid left-[28.09px] size-[151.816px] top-[28.09px]" 
-          data-name="Container" 
+          className="absolute border-2 border-slate-200 border-solid left-[28.09px] size-[151.816px] top-[28.09px]"
+          data-name="Container"
         />
-        <motion.div 
+        <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute border-2 border-slate-200 border-solid left-[1343.07px] size-[113.862px] top-[151.07px]" 
-          data-name="Container" 
+          className="absolute border-2 border-slate-200 border-solid left-[1343.07px] size-[113.862px] top-[151.07px]"
+          data-name="Container"
         />
-        <motion.div 
+        <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute border-2 border-slate-200 border-solid left-[365.43px] size-[113.137px] top-[327.43px]" 
-          data-name="Container" 
+          className="absolute border-2 border-slate-200 border-solid left-[365.43px] size-[113.137px] top-[327.43px]"
+          data-name="Container"
         />
-        <motion.div 
+        <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute border-2 border-slate-200 border-solid left-[941.42px] size-[90.51px] top-[154.73px]" 
-          data-name="Container" 
+          className="absolute border-2 border-slate-200 border-solid left-[941.42px] size-[90.51px] top-[154.73px]"
+          data-name="Container"
         />
       </div>
-      <motion.div 
+      <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="absolute bg-white h-[241px] left-[267px] rounded-[16px] top-[263px] w-[993px]" 
+        className="absolute bg-white h-[241px] left-[267px] rounded-[16px] top-[263px] w-[993px]"
         data-name="Prompt Box"
       >
         <div className="box-border content-stretch flex flex-col gap-[10px] h-[241px] items-center justify-center overflow-clip px-[32px] py-[48px] relative rounded-[inherit] w-[993px]">
@@ -139,16 +139,16 @@ export function Hero({ onCTAClick }: HeroProps) {
               </div>
             </div>
           </div>
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="content-stretch flex flex-col gap-[24px] items-center max-w-[400px] relative shrink-0 w-[400px]" 
+            className="content-stretch flex flex-col gap-[24px] items-center max-w-[400px] relative shrink-0 w-[400px]"
             data-name="Top Part"
           >
             <div className="content-stretch flex flex-col gap-[6px] items-center not-italic relative shrink-0 text-center w-full" data-name="Page Title Wrapper">
-              <p className="font-['Inter:Medium',sans-serif] font-medium leading-[1.3] relative shrink-0 text-[#19213d] text-[22px] text-nowrap whitespace-pre">Bem vindo, Paulo</p>
-              <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] min-w-full relative shrink-0 text-[#666f8d] text-[14px] w-[min-content]">Exemplo xxx - xxx - xxx</p>
+              <p className="font-['Inter:Medium',sans-serif] font-medium leading-[1.3] relative shrink-0 text-[#19213d] text-[22px] text-nowrap whitespace-pre">Bem vindo</p>
+              <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] min-w-full relative shrink-0 text-[#666f8d] text-[14px] w-[min-content]"></p>
             </div>
             <div className="box-border content-stretch flex flex-col items-end pb-px pt-0 px-0 relative shrink-0 w-full" data-name="Prompt Box">
               <div className="bg-white mb-[-1px] relative rounded-[16px] shrink-0 w-full" data-name="Box Wrapper">
@@ -159,11 +159,11 @@ export function Hero({ onCTAClick }: HeroProps) {
                       <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[#666f8d] text-[14px] text-nowrap whitespace-pre">Como posso ajudá-lo hoje?</p>
                     </div>
                     <div className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0" data-name="Prompt Box">
-                      <motion.div 
+                      <motion.div
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="bg-[#69b8ce] relative rounded-[8px] shrink-0 size-[42px] cursor-pointer" 
-                        data-name="Primary Button" 
+                        className="bg-[#69b8ce] relative rounded-[8px] shrink-0 size-[42px] cursor-pointer"
+                        data-name="Primary Button"
                         onClick={onCTAClick}
                       >
                         <div className="content-stretch flex items-center justify-center overflow-clip relative rounded-[inherit] size-[42px]">

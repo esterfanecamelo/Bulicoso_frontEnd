@@ -9,10 +9,10 @@ interface LoginPageProps {
 export default function LoginPage({ onGoogleLogin }: LoginPageProps) {
   return (
     <div className="relative w-screen h-screen overflow-hidden" data-name="Login">
-      <div className="absolute inset-0" data-name="Tela de loguin">
+      <div className="absolute inset-0" data-name="Tela de login">
         <div className="absolute inset-0">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1928 1088">
-            <g id="Tela de loguin">
+            <g id="Tela de login">
               <g filter="url(#filter0_d_1_976)" id="Rectangle 1">
                 <path d="M4 0H1924V1080H974H4V0Z" fill="white" />
               </g>
@@ -32,22 +32,22 @@ export default function LoginPage({ onGoogleLogin }: LoginPageProps) {
           </svg>
         </div>
       </div>
-      <motion.div 
+      <motion.div
         initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-        className="absolute left-[8%] w-[42vw] h-[42vw] top-[50%] -translate-y-[50%]" 
+        className="absolute left-[8%] w-[42vw] h-[42vw] top-[50%] -translate-y-[50%]"
         data-name="Gemini_Generated_Image_emqzvbemqzvbemqz 1"
       >
-        <motion.img 
+        <motion.img
           whileHover={{ scale: 1.05, rotate: 2 }}
           transition={{ duration: 0.3 }}
-          alt="" 
-          className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full cursor-pointer" 
-          src={imgGeminiGeneratedImageEmqzvbemqzvbemqz1} 
+          alt=""
+          className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full cursor-pointer"
+          src={imgGeminiGeneratedImageEmqzvbemqzvbemqz1}
         />
       </motion.div>
-      <motion.div 
+      <motion.div
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
