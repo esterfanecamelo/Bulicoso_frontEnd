@@ -143,9 +143,17 @@ export default function MainContent() {
       setLoading(true);
       try {
           const res = await api.scheduleTreatment(scheduleData.instrucao, scheduleData.inicio);
+
+          if (!res || !res.message) {
+            throw new Error("Resposta inválida da API");
+          }
+
           setMessages(prev => [...prev, { role: 'bot', text: `✅ Agendado! ${res.message}` }]);
-      } catch { setMessages(prev => [...prev, { role: 'bot', text: "Erro ao agendar." }]); }
-      finally { setLoading(false); setScheduleData({ instrucao: "", inicio: "agora" }); }
+      } catch { 
+        setMessages(prev => [...prev, { role: 'bot', text: "❌ Erro ao agendar, confira formatação!" }]); }
+      finally { 
+        setLoading(false); 
+        setScheduleData({ instrucao: "", inicio: "agora" }); }
   };
 
   // --- CANCELAMENTO ---
@@ -167,7 +175,7 @@ export default function MainContent() {
       setLoading(true);
       try {
           const res = await api.editEvent(selectedEventIds[0], editNewTime);
-          setMessages(prev => [...prev, { role: 'bot', text: `✅ Editado! Novo horário: ${res.start_time}` }]);
+          setMessages(prev => [...prev, { role: 'bot', text: `✅ Editado com sucesso!` }]);
       } catch (e) {
           setMessages(prev => [...prev, { role: 'bot', text: `Erro ao editar: ${e.message}` }]);
       }
@@ -217,7 +225,7 @@ export default function MainContent() {
 
       <header className="main-header">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h1 className="welcome">Bem vindo, Paulo</h1>
+            <h1 className="welcome">Bem vindo, Ítalo</h1>
             <p className="subtitle">Assistente Inteligente de Medicação</p>
         </div>
 
@@ -267,8 +275,19 @@ export default function MainContent() {
           <div className="modal-overlay">
               <div className="modal-content">
                   <h3>Agendar</h3>
-                  <input className="modal-input" placeholder="Instrução (Ex: Dipirona 8/8h por 5 dias)" value={scheduleData.instrucao} onChange={(e) => setScheduleData({...scheduleData, instrucao: e.target.value})} />
-                  <input className="modal-input" style={{marginTop: 10}} placeholder="Início (agora)" value={scheduleData.inicio} onChange={(e) => setScheduleData({...scheduleData, inicio: e.target.value})} />
+                  <input 
+                    className="modal-input" 
+                    placeholder="Instrução (Ex: Dipirona 8/8h por 5 dias)" 
+                    value={scheduleData.instrucao} 
+                    onChange={(e) => setScheduleData({...scheduleData, instrucao: e.target.value})} 
+                  />
+                  <input 
+                    className="modal-input" 
+                    style={{marginTop: 10}} 
+                    placeholder="DD/MM/AAAA HH:MM" 
+                    value={scheduleData.inicio} 
+                    onChange={(e) => setScheduleData({...scheduleData, inicio: e.target.value})} 
+                  />
                   <div className="modal-actions">
                       <button className="cancel-btn" onClick={() => setShowScheduleForm(false)}>Voltar</button>
                       <button className="confirm-btn" onClick={handleConfirmSchedule}>Confirmar</button>
